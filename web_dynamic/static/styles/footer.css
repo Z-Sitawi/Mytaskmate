@@ -1,0 +1,12 @@
+footer, section.aboutUs, section.contactUs {
+    background-color: rgb(6, 71, 68);
+    color: aliceblue;
+}
+
+section h6{
+    color: rgb(254, 255, 185);
+}
+
+.MyTaskMate-btn {
+    background-color: rgb(13, 151, 140);
+}

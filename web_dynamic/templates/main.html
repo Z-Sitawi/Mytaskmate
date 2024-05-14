@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='T.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>MyTaskMate</title>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/footer.css') }}">
+    {% if up %}
+    <style>
+        #signUp {
+            display: flex;
+        }
+    </style>
+    {% endif %}
+    {% if In %}
+    <style>
+        #signIn {
+            display: flex;
+        }
+    </style>
+    {% endif %}
+
+</head>
+<body>
+    <header>
+        <h2 class="text-center m-0 py-2">MyTaskMate</h2>
+    </header>
+    <main id="background" class="py-5 row justify-content-center align-items-center m-0">
+        <section id="bar" class="col-9 p-1 d-flex">
+
+        <nav class="container navbar navbar-expand-sm p-0">
+          <div class="container-fluid">
+              <ul class="navbar-nav p-0">
+                <li class="nav-item transparent">
+                  <a class="nav-link text-dark" href="/">MyTaskMate</a>
+                </li>
+                <li class="nav-item transparent">
+                  <a class="nav-link text-dark" href="#abus">About Us</a>
+                </li>
+                <li class="nav-item transparent">
+                  <a class="nav-link text-dark" href="#cus">Contact Us</a>
+                </li>
+              </ul>
+          </div>
+        </nav>
+        <nav class="container navbar navbar-expand-sm p-0 d-flex justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <button id="signinBtn">Sign in</button>
+                </li>
+                <li class="nav-item">
+                  <button id="signupBtn">Sign Up</button>
+                </li>
+            </ul>
+        </nav>
+
+      </section>
+        <div id="signUp" class="row justify-content-center m-0">
+            <div class="col-10 col-sm-8 col-md-6 col-xl-4 m-0">
+              <div class="bg-MyTaskMate-1">
+                <div class="card-body">
+                  <h5 class="card-title text-center mb-4">Sign Up</h5>
+
+                  <form action="/signup" method="post">
+                    <div class="mb-3">
+                      <label for="username" class="form-label">Username</label>
+                      <input type="text" class="form-control" id="username" name="username"
+                             placeholder="Enter username" pattern="[a-zA-Z0-9_]{3,20}"
+                             title="Username must be 3-15 characters long and can only contain
+                             letters, numbers, and underscores." required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="email" name="email"
+                             placeholder="Enter email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                             title="Please enter a valid email address." required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="password" name="pwd"
+                             placeholder="Enter password" pattern=".{8,}"
+                             title="Password must be at least 8 characters long." required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="confirmPassword" class="form-label">Confirm Password</label>
+                      <input type="password" class="form-control" id="confirmPassword" name="pwd2"
+                             placeholder="Confirm password" pattern=".{8,}"
+                             title="Password must be at least 8 characters long." required>
+                    </div>
+                    <input type="submit" class="btn MyTaskMate-btn" value="Sign Up">
+                  </form>
+                    {% if errors %}
+                    <div class="alert alert-danger m-1 text-center" role="alert">
+                        {{ errors[0] }}
+                    </div>
+                    {% elif message %}
+                    <div class="alert alert-success m-1 text-center" role="alert">
+                        {{ message }}
+                    </div>
+                    {% endif %}
+
+                </div>
+                <p class="text-center">
+                  Already have an account?
+                  <span onclick="action('in')">&nbsp;Sign in</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        <div id="signIn" class="row justify-content-center m-0">
+            <div class="col-10 col-sm-8 col-md-6 col-xl-4 m-0">
+              <div class="bg-MyTaskMate-1">
+                <div class="card-body">
+                  <h5 class="card-title text-center mb-4">Sign In</h5>
+                  <form action="/login" method="post">
+                    <div class="mb-3">
+                      <label for="usernameLogin" class="form-label">Username</label>
+                      <input type="text" class="form-control" id="usernameLogin" name="loginUser"
+                             placeholder="Enter username or email" pattern=".{3,}"
+                             title="Username must be at least 3 characters" required>
+                    </div>
+                    <div class="mb-3">
+                      <label for="passwordLogin" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="passwordLogin" name="loginPwd"
+                             placeholder="Enter password" pattern=".{8,}"
+                             title="Password must be at least 8 characters" required>
+                    </div>
+                    <button type="submit" class="btn MyTaskMate-btn">Sign In</button>
+                  </form>
+                    {% if loginError %}
+                    <div class="alert alert-danger m-1 text-center" role="alert">
+                        {{ loginError }}
+                    </div>
+                    {% endif %}
+                </div>
+                <p onclick="action('up')" class="text-center">Create an account</p>
+              </div>
+            </div>
+          </div>
+        
+    </main>
+    <footer class="row m-0 py-4">
+      <section class="aboutUs col-12">
+        <h6 class="text-center my-3" id="abus">About Us</h6>
+        <p class="container">MytaskMate Project is your personal task management companion designed to simplify your daily routines. Our website is tailored for individuals seeking a straightforward solution to organize their tasks effectively.
+          <br><br>
+          At MytaskMate, we recognize the importance of daily missions in achieving personal and professional goals. That's why our platform enables users to create a mission for each day, helping them focus on what matters most.
+          <br><br>
+          With MytaskMate, you can easily create tasks related to your daily mission and mark them as done once completed. Our intuitive interface ensures a seamless experience, allowing you to stay organized and productive throughout the day.
+          <br><br>
+          Experience the convenience of having your tasks neatly arranged and accessible in one place. MytaskMate Project is your trusted ally in conquering daily challenges and turning aspirations into accomplishments.
+          <br><br>
+          Start your journey towards enhanced productivity and efficiency with MytaskMate Project today!
+          </p>
+      </section>
+
+      <section class="contactUs col-12">
+        <h6 class="text-center my-3" id="cus">Contact Us</h6>
+        <div class="container col-10 col-sm-8 col-md-6 col-xl-4">
+          <form id="contactForm col-4">
+            <label for="name" class="form-label">Name :</label>
+            <input type="text" class="form-control" id="name" required>
+            
+            <label for="contactEmail" class="form-label">E-mail :</label>
+            <input type="email" class="form-control" id="contactEmail" required>
+  
+            <label for="message" class="form-label">Message :</label>
+            <textarea class="form-control" id="message" rows="4" required></textarea>
+    
+            <button type="button" class="btn MyTaskMate-btn my-1">Send</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="d-flex-column text-center pt-5">
+        <p>&copy; 2024 MyTaskMate. All rights reserved.<p>
+        <span>Create by <a>Zakaria Aaichaou</a></span>
+      </section>
+
+    </footer>
+</body>
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+</html>

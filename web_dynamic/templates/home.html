@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='T.png') }}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>MyTaskMate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/home.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/footer.css') }}">
+
+    <script> const userId = "{{ user_id }}";
+    </script>
+</head>
+<body>
+    <header> <h2 class="text-center m-0">MyTaskMate</h2> <nav class="container navbar navbar-expand-sm p-0"> <div class="container-fluid"> <ul class="navbar-nav p-0"> <li class="nav-item"> <a class="nav-link active" href="./dashboard">Dashboard</a> </li> <li class="nav-item"> <a class="nav-link" href="./home">Home</a> </li> <li class="nav-item"> <a class="nav-link" href="history">History</a> </li> <li class="nav-item"> <a class="nav-link" href="settings">Settings</a> </li> </ul> </div> <div class="logo" onclick="show()"> </div> <div id="dropdown" style="display: none"> <ul> <li>Profile</li> <li>Settings</li> <li onclick="logOut()">Logout</li> </ul> </div> </nav>
+    </header>
+    <div class="py-4"></div>
+    <main class="m-0">
+         <div class="container d-flex justify-content-center align-items-center py-2" id="btn-container"> <button id="createMission" class="btn MyTaskMate-btn" onclick="action('create')"> Create New Mission </button> <button id="deleteMission" class="btn" style="display: none;" onclick="action('delete')" data-toggle="modal"  data-target="#confirmationModal"> Delete Mission </button> </div>
+
+
+      <div id="missionDate" class="d-flex justify-content-center align-items-center py-2"> <h2 class="m-0">&nbsp;</h2>
+      </div>
+      
+      <section id="mission" class="container mb-5"> <ul id="taskList" class="px-5" style="list-style: none;"> {% if tasks %}  {% for task in tasks %} <li id="{{ task['id'] }}"> {% if task.completed %}  {% set taskStatus = '✅' %}  {% else %}  {% set taskStatus = '☐' %}  {% endif %} <i onclick="taskDel(this)" id="trash" class="fas fa-trash" style="display:block;"></i> <a onclick="taskDone(this)" id="done" style="display:block;">{{ taskStatus }}</a> <input type="text" placeholder="{{ task['title'] }}" disabled> </li> {% endfor %}  {% endif %} </ul> <b id="addTaskBtn" onclick="createTask()" title="Add a task">+</b>
+      </section>
+      <div id="noTasks" class=""> <h1>No Tasks Yet</h1></div>
+    </main>
+    
+    
+    <footer class="row m-0 py-4">
+      <section class="aboutUs col-12"> <h6 class="text-center my-3" id="abus">About Us</h6> <p class="container">MytaskMate Project is your personal task management companion designed to simplify your daily routines. Our website is tailored for individuals seeking a straightforward solution to organize their tasks effectively. <br><br> At MytaskMate, we recognize the importance of daily missions in achieving personal and professional goals. That's why our platform enables users to create a mission for each day, helping them focus on what matters most. <br><br> With MytaskMate, you can easily create tasks related to your daily mission and mark them as done once completed. Our intuitive interface ensures a seamless experience, allowing you to stay organized and productive throughout the day. <br><br> Experience the convenience of having your tasks neatly arranged and accessible in one place. MytaskMate Project is your trusted ally in conquering daily challenges and turning aspirations into accomplishments. <br><br> Start your journey towards enhanced productivity and efficiency with MytaskMate Project today! </p>
+      </section>
+
+      <section class="contactUs col-12"> <h6 class="text-center my-3" id="cus">Contact Us</h6> <div class="container col-10 col-sm-8 col-md-6 col-xl-4"> <form id="contactForm col-4"> <label for="name" class="form-label">Name :</label> <input type="text" class="form-control" id="name" required> <label for="email" class="form-label">E-mail :</label> <input type="email" class="form-control" id="email" required>
+           <label for="message" class="form-label">Message :</label> <textarea class="form-control" id="message" rows="4" required></textarea>
+           <button type="submit" class="btn MyTaskMate-btn my-1">Send</button> </form> </div>
+      </section>
+
+      <section class="d-flex-column text-center pt-5"> <p>&copy; 2024 MyTaskMate. All rights reserved.<p> <span>Create by <a>Zakaria Aaichaou</a></span>
+      </section>
+
+    </footer>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"  aria-labelledby="confirmationModalLabel" aria-hidden="true"> <div class="modal-dialog" role="document"> <div class="modal-content" style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);"> <div class="modal-header" style="background-color: rgb(55, 173, 164); border: none;"> <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5> </div> <div class="modal-body" style="background-color: rgb(79, 203, 193);"> <h6>Are you sure you want to delete this mission?</h6></div> <div class="modal-footer" style="background-color: rgb(79, 203, 193); border: none;"> <button type="button" class="btn btn-light" data-dismiss="modal"  style="box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);">No</button> <button type="button" class="btn btn-dark" id="confirmDeleteButton">Yes</button> </div> </div> </div>
+    </div>
+
+     <!-- Container for the alert -->
+    <div class="alert-container"> <div id="alert" class="alert alert-danger alert-dismissible fade show d-none py-1" role="alert"> You've just <strong>deleted</strong> a task. </div>
+    </div>
+</body>
+    <script src="{{ url_for('static', filename='scripts/headers.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/home.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</html>

@@ -1,0 +1,178 @@
+main {
+    background-color: rgb(211, 247, 244);
+    min-height: 90vh;
+    position: relative;
+}
+
+.bg-MyTaskMate-1 {
+    background-color: rgba(228, 255, 253, 0.825);
+    border: 1px solid rgba(0, 0, 0, 0.539);
+    border-radius: 5px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+}
+.MyTaskMate-btn {
+    background-color: rgb(13, 151, 140);
+}
+
+#deleteMission {
+    background-color: rgb(249, 78, 78);
+}
+
+#missionDate {
+    color: rgb(19, 201, 186);
+    background-color: rgb(6, 71, 68);
+    font-size: large;
+    font-weight: bold;
+    box-shadow: 0px -3px 10px 0px rgba(0, 0, 0, 0.647);
+}
+
+#btn-container {
+    background-color: rgb(3, 52, 49);
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.647);
+}
+
+#mission {
+    position: relative;
+    background-color: rgb(13, 151, 140);
+    min-height: 0px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.647);
+    transition: min-height 1s;
+}
+
+#noTasks h1 {
+    font-size: 80px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 50vw;
+    text-align: center;
+    color: rgba(6, 71, 68, 0.641);
+}
+
+#noTasks {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 25vw);
+}
+
+#deleteMission, #createMission {
+    border-radius: 100px;
+    font-weight: bolder;
+}
+
+#deleteMission:hover, #createMission:hover {
+    color: white;
+    box-shadow: 0px 0px 5px 1px rgba(250, 250, 250, 0.647);
+}
+
+#createMission:hover{
+    background-color: rgb(13, 210, 140, 0.3);
+}
+
+#deleteMission:hover{
+    background-color: rgb(250, 10, 0, 0.8);
+}
+
+#addTaskBtn {
+    display: none;
+    position: absolute;
+    bottom: -70px;
+    left: calc(50% - 15px);
+    outline: 2px solid black;
+    background-color: rgb(14, 114, 109);
+    padding: 0px 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 5px 1px rgba(0, 0, 0, 0.647);
+    font-size: xx-large;
+    transition: 0.5s;
+}
+
+#addTaskBtn:hover {
+    color: aquamarine;
+    border-radius: 5px;
+    background-color: rgb(10, 99, 94);
+}
+
+#taskList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 5px;
+}
+
+#taskList li {
+    position: relative;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+#taskList li input {
+    background-color: ghostwhite;
+    width: 100%;
+    border: none;
+    border-radius: 2px;
+    padding: 2px 0px;
+    text-indent: 15px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+#taskList li input::placeholder {
+    color: black;
+    font-weight: bold;
+    font-family: 'monospace', 'ui-serif', 'revert', 'system-ui';
+}
+
+#taskList li:nth-child(2n){
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#taskList li:nth-child(2n + 1){
+    background-color: rgba(179, 179, 179, 0.9);
+    box-shadow: -2px 2px 8px 1px rgba(0, 0, 0, 0.647);
+
+}
+
+#done {
+    padding: 0px 10px;
+    font-weight: bolder;
+    font-size: large;
+    border: none;
+    border-radius: 5px;
+    position: absolute;
+    top: 5%;
+    left: -50px;
+    color: rgb(100, 255, 242);
+    display: none;
+}
+
+#done:hover {
+    color: black;
+}
+
+#trash {
+    position: absolute;
+    top: 30%;
+    right: -50px;
+    display: none;
+}
+
+#trash:hover {
+    color: red;
+}
+
+.alert-container {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 90vw;
+    z-index: 1000;
+}

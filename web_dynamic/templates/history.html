@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='T.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>MyTaskMate</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/footer.css') }}">
+
+    <style>
+        table {
+        background-color: rgb(82, 188, 179);
+        border-top-left-radius: 10px !important;
+        border-top-right-radius: 10px !important;
+        box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.647);
+        }
+
+        thead tr {
+        background-color: rgb(13, 151, 140);
+        }
+
+        tbody tr{
+        box-shadow: 0px 0px 0px 0.2px rgba(0, 0, 0, 0.647);
+        }
+
+        thead tr th:first-of-type {
+        border-top-left-radius: 10px;
+        }
+        thead tr th:last-of-type {
+        border-top-right-radius: 10px;
+        }
+
+        tr td:nth-child(2n) {
+        background-color: rgb(169, 232, 225);
+        }
+
+        u {
+        transition: 0.3s;
+        color: rgb(0, 92, 255);
+        cursor: pointer;
+        }
+
+        u:hover {
+        color: #fff;
+        }
+
+        main {
+        position: relative;
+      }
+
+      #tasksContainer {
+        background-color: rgb(13, 151, 140);
+        position: absolute;
+        top: -2px;
+        left: 0px;
+        width: 100%;
+        height: 0px;
+        border-radius: 5px;
+        transition: 0.5s;
+
+      }
+
+      #tasksContainer span {
+        padding: 0px 50px 3px 50px;
+        position: relative;
+        left: calc(50% - 70px);
+        top: 0px;
+        cursor: pointer;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.6);
+      }
+      #tasksContainer {
+      overflow: auto;
+      max-height: 300px;
+      }
+
+      #tasksContainer ul li p {
+    background-color: ghostwhite;
+    width: 100%;
+    border-radius: 10px;
+    padding: 5px 10px;
+    margin-right: 2%;
+    text-indent: 15px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+    }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h2 class="text-center m-0">MyTaskMate</h2>
+        <nav class="container navbar navbar-expand-sm p-0">
+            <div class="container-fluid">
+                <ul class="navbar-nav p-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="./dashboard">Dashboard</a>
+                    </li>
+                   <li class="nav-item">
+                      <a class="nav-link" href="./home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="history">History</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="settings">Settings</a>
+                    </li>
+                  </ul>
+            </div>
+            <div class="logo" onclick="show()">
+            </div>
+            <div id="dropdown" style="display: none">
+            <ul>
+              <li>Profile</li>
+              <li>Settings</li>
+              <li onclick="logOut()">Logout</li>
+            </ul>
+          </div>
+        </nav>
+    </header><br>
+
+    <main class="container mt-5">
+      <table class="table table-borderless table-striped">
+        <thead>
+          <tr class="text-center">
+            <th scope="col">Mission</th>
+            <th scope="col">Total Tasks</th>
+            <th scope="col">Completed Tasks</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if missions %}
+            {% for mission in missions %}
+            <tr class="text-center">
+                <td class="p-3">
+                    <u>
+                        <b onclick="showTasks('{{mission['id']}}')" >{{ mission['created_at'].split()[0] }}</b>
+                    </u>
+                </td>
+                <td class="p-3">{{ mission['total_tasks'] }}</td>
+                <td class="p-3">{{ mission['completed_tasks'] }}</td>
+                <td class="p-3">{{ (mission['completed_tasks'] * 100 / mission['total_tasks']) | round(2) }}%</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+
+      </table>
+        <div id="tasksContainer">
+            <span class="d-none text-light">Hide</span>
+            <ul class="container nav d-flex flex-wrap"></ul>
+        </div>
+    </main>
+    <footer class="row m-0 py-4">
+      <section class="aboutUs col-12">
+        <h6 class="text-center my-3" id="abus">About Us</h6>
+        <p class="container">MytaskMate Project is your personal task management companion designed to simplify your daily routines. Our website is tailored for individuals seeking a straightforward solution to organize their tasks effectively.
+          <br><br>
+          At MytaskMate, we recognize the importance of daily missions in achieving personal and professional goals. That's why our platform enables users to create a mission for each day, helping them focus on what matters most.
+          <br><br>
+          With MytaskMate, you can easily create tasks related to your daily mission and mark them as done once completed. Our intuitive interface ensures a seamless experience, allowing you to stay organized and productive throughout the day.
+          <br><br>
+          Experience the convenience of having your tasks neatly arranged and accessible in one place. MytaskMate Project is your trusted ally in conquering daily challenges and turning aspirations into accomplishments.
+          <br><br>
+          Start your journey towards enhanced productivity and efficiency with MytaskMate Project today!
+          </p>
+      </section>
+
+      <section class="contactUs col-12">
+        <h6 class="text-center my-3" id="cus">Contact Us</h6>
+        <div class="container col-10 col-sm-8 col-md-6 col-xl-4">
+          <form id="contactForm col-4">
+            <label for="name" class="form-label">Name :</label>
+            <input type="text" class="form-control" id="name" required>
+            
+            <label for="email" class="form-label">E-mail :</label>
+            <input type="email" class="form-control" id="email" required>
+  
+            <label for="message" class="form-label">Message :</label>
+            <textarea class="form-control" id="message" rows="4" required></textarea>
+    
+            <button type="submit" class="btn MyTaskMate-btn my-1">Send</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="d-flex-column text-center pt-5">
+        <p>&copy; 2024 MyTaskMate. All rights reserved.<p>
+        <span>Create by <a>Zakaria Aaichaou</a></span>
+      </section>
+
+    </footer>
+</body>
+    <script src="{{ url_for('static', filename='scripts/headers.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/history.js') }}"></script>
+</html>

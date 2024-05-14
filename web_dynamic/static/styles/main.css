@@ -1,0 +1,107 @@
+header h2 {
+  color: rgba(240, 248, 255, 0.66);
+  background-color: rgb(6, 71, 68);
+}
+.transparent {
+    box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.647);
+    background-color: rgba(255, 255, 255, 0.185);
+    margin-right: 20px;
+    text-wrap: nowrap;
+    border-radius: 5px;
+    font-weight: bolder;
+    color: black;
+    transition: 0.6s;
+}
+
+#signinBtn, #signupBtn {
+  box-shadow: 2px 2px 5px 5px rgba(0, 0, 0, 0.647);
+  margin-right: 20px;
+  text-wrap: nowrap;
+  font-weight: bolder;
+  color: black;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 15px;
+  font-weight: 500;
+  transition: 0.5s;
+}
+
+#signupBtn {
+  background-image: linear-gradient(white, rgb(188, 255, 252), white);
+}
+
+#signinBtn {
+  background-image: linear-gradient(rgba(7, 132, 122, 0.62), rgba(32, 212, 197, 0.603), rgb(7, 132, 122));
+}
+
+#signinBtn:hover, #signupBtn:hover {
+  color: white;
+  background-image: linear-gradient(rgb(29, 169, 157), rgb(4, 88, 81));
+  font-size: medium;
+
+}
+.transparent:hover {
+    box-shadow: none;
+    font-size: smaller;
+    font-weight: bold;
+    text-shadow: none;
+    box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.614);
+}
+
+main {
+    min-height: 90vh;
+    width: 100%;
+}
+
+main#background {
+    background-image: url('../mtmbg.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+#bar {
+  position: absolute;
+  top: 0;
+}
+
+
+.bg-MyTaskMate-1 {
+    background-image: linear-gradient(rgb(215, 252, 249), rgb(135, 233, 235), rgb(215, 252, 249));
+    border: 1px solid rgba(0, 0, 0, 0.539);
+    border-radius: 5px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+}
+
+.bg-MyTaskMate-1:hover {
+    animation: pulse 3s infinite ease-in-out ;
+}
+
+.MyTaskMate-btn {
+    background-color: rgb(13, 151, 140);
+}
+
+@keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgb(13, 151, 140);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
+
+#signIn, #signUp {
+    display: none;
+}
+
+#signIn p, #signUp p {
+  font-size: small;
+}
+
+#signIn p:hover, #signUp p span:hover{
+  color: rgb(13, 151, 140);
+}

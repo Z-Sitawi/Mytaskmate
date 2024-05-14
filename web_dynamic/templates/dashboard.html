@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ url_for('static', filename='T.png') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>MyTaskMate</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/footer.css') }}">
+
+
+</head>
+<body>
+    <header>
+        <h2 class="text-center m-0">MyTaskMate</h2>
+        <nav class="container navbar navbar-expand-sm p-0">
+            <div class="container-fluid">
+                <ul class="navbar-nav p-0">
+                    <li class="nav-item">
+                      <a class="nav-link active" href="./dashboard">Dashboard</a>
+                    </li>
+                   <li class="nav-item">
+                      <a class="nav-link" href="./home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="history">History</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="settings">Settings</a>
+                    </li>
+                  </ul>
+            </div>
+            <div class="logo" onclick="show()">
+            </div>
+            <div id="dropdown" style="display: none">
+            <ul>
+              <li>Profile</li>
+              <li>Settings</li>
+              <li onclick="logOut()">Logout</li>
+            </ul>
+          </div>
+        </nav>
+    </header><br>
+    <h1>dashboard</h1>
+    <footer class="row m-0 py-4">
+      <section class="aboutUs col-12">
+        <h6 class="text-center my-3" id="abus">About Us</h6>
+        <p class="container">MytaskMate Project is your personal task management companion designed to simplify your daily routines. Our website is tailored for individuals seeking a straightforward solution to organize their tasks effectively.
+          <br><br>
+          At MytaskMate, we recognize the importance of daily missions in achieving personal and professional goals. That's why our platform enables users to create a mission for each day, helping them focus on what matters most.
+          <br><br>
+          With MytaskMate, you can easily create tasks related to your daily mission and mark them as done once completed. Our intuitive interface ensures a seamless experience, allowing you to stay organized and productive throughout the day.
+          <br><br>
+          Experience the convenience of having your tasks neatly arranged and accessible in one place. MytaskMate Project is your trusted ally in conquering daily challenges and turning aspirations into accomplishments.
+          <br><br>
+          Start your journey towards enhanced productivity and efficiency with MytaskMate Project today!
+          </p>
+      </section>
+
+      <section class="contactUs col-12">
+        <h6 class="text-center my-3" id="cus">Contact Us</h6>
+        <div class="container col-10 col-sm-8 col-md-6 col-xl-4">
+          <form id="contactForm col-4">
+            <label for="name" class="form-label">Name :</label>
+            <input type="text" class="form-control" id="name" required>
+            
+            <label for="email" class="form-label">E-mail :</label>
+            <input type="email" class="form-control" id="email" required>
+  
+            <label for="message" class="form-label">Message :</label>
+            <textarea class="form-control" id="message" rows="4" required></textarea>
+    
+            <button type="submit" class="btn MyTaskMate-btn my-1">Send</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="d-flex-column text-center pt-5">
+        <p>&copy; 2024 MyTaskMate. All rights reserved.<p>
+        <span>Create by <a>Zakaria Aaichaou</a></span>
+      </section>
+
+    </footer>
+</body>
+    <script src="{{ url_for('static', filename='scripts/headers.js') }}"></script>
+</html>

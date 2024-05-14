@@ -1,0 +1,94 @@
+body {
+     background-color: rgb(211, 247, 244);
+}
+header {
+    background-color: rgb(13, 151, 140);
+}
+header h2 {
+    color: rgba(240, 248, 255, 0.66);
+    background-color: rgb(6, 71, 68);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+a.nav-link {
+    color: black;
+}
+nav > div.logo {
+    background-color: rgb(5, 55, 50);
+    padding: 15px;
+    border-radius: 50%;
+    margin-right: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+
+}
+
+div ul.navbar-nav {
+    position: relative;
+}
+div ul.navbar-nav li.nav-item{
+    position: relative;
+    transition: 0.8s;
+}
+
+
+
+ul li.nav-item::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background-color: inherit;
+}
+
+a.nav-link:hover {
+    color: aliceblue;
+}
+
+ul li.nav-item:hover {
+    background-color: rgb(20, 108, 104);
+}
+
+#dropdown {
+    z-index: 1;
+    font-size: small;
+    width: 150px;
+    position: absolute;
+    top: 100%;
+    right: -45px;
+    box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.164);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+#dropdown ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#dropdown ul li {
+    background-color: rgb(116, 192, 188);
+    padding: 5px;
+    margin: 0;
+    transition: font-weight 0.5s, color 0.8s;
+}
+
+#dropdown ul li:nth-child(2) {
+    background-color: rgb(98, 165, 162);
+
+}
+
+#dropdown ul li:last-child {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#dropdown ul li:hover {
+    background-color: rgb(20, 108, 104);
+    color: wheat;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.254);
+    border: none;
+}
