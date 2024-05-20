@@ -1,0 +1,1 @@
+web: gunicorn web_dynamic.api.v1.app:app
