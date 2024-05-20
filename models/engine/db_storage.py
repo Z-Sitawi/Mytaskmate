@@ -11,6 +11,12 @@ from os import getenv
 classes = {'User': User, 'Mission': Mission, 'Task': Task}
 
 
+def current_date():
+    from datetime import datetime
+    now = datetime.now()
+    return {"day": now.day, "month": now.month, "year": now.year}
+
+
 def check_24h_passed(mission_date_time):
     """ Checks creation date and time of mission entered.
     If it passed 24h returns True, otherwise False.
@@ -228,3 +234,40 @@ class DBStorage:
             return sorted_missions
         else:
             return []
+
+    def get_dashboard_info(self, u_id):
+        """Retrieves dashboard information for a user."""
+        info = {
+            "today": {"total_tasks": 0, "completed": 0, "uncompleted": 0},
+            "month": {"missions": 0, "total_tasks": 0, "completed": 0, "uncompleted": 0},
+            "all": {"missions": 0, "total_tasks": 0, "completed": 0, "uncompleted": 0}
+        }
+
+        with self.__session as session:
+            missions = session.query(Mission).filter_by(user_id=u_id).all()
+
+        if missions:
+            now = current_date()
+            info["all"]['missions'] = len(missions)
+
+            for m in missions:
+                # Updating today's tasks
+                if m.active:
+                    info['today']['total_tasks'] += m.total_tasks
+                    info['today']['completed'] += m.completed_tasks
+                    info['today']['uncompleted'] = info['today']['total_tasks'] - info['today']['completed']
+
+                # Updating this month's tasks
+                if m.created_at.month == now['month'] and m.created_at.year == now['year']:
+                    info['month']['missions'] += 1
+                    info['month']['total_tasks'] += m.total_tasks
+                    info['month']['completed'] += m.completed_tasks
+                    info['month']['uncompleted'] = info['month']['total_tasks'] - info['month']['completed']
+
+                # Updating all-time tasks
+                info['all']['total_tasks'] += m.total_tasks
+                info['all']['completed'] += m.completed_tasks
+                info['all']['uncompleted'] = info['all']['total_tasks'] - info['all']['completed']
+
+        return info
+

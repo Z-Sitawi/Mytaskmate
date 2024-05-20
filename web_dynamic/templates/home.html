@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="icon" href="{{ url_for('static', filename='T.png') }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <title>MyTaskMate</title>
@@ -11,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/home.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/footer.css') }}">
 
-    <script> const userId = "{{ user_id }}";
+    <script type="text/javascript">
+        const userId = "{{ user_id }}";
     </script>
 </head>
 <body>
@@ -27,7 +29,7 @@
       
       <section id="mission" class="container mb-5"> <ul id="taskList" class="px-5" style="list-style: none;"> {% if tasks %}  {% for task in tasks %} <li id="{{ task['id'] }}"> {% if task.completed %}  {% set taskStatus = '✅' %}  {% else %}  {% set taskStatus = '☐' %}  {% endif %} <i onclick="taskDel(this)" id="trash" class="fas fa-trash" style="display:block;"></i> <a onclick="taskDone(this)" id="done" style="display:block;">{{ taskStatus }}</a> <input type="text" placeholder="{{ task['title'] }}" disabled> </li> {% endfor %}  {% endif %} </ul> <b id="addTaskBtn" onclick="createTask()" title="Add a task">+</b>
       </section>
-      <div id="noTasks" class=""> <h1>No Tasks Yet</h1></div>
+      <div id="noTasks" class="d-none"> <h1>No Tasks Yet</h1></div>
     </main>
     
     

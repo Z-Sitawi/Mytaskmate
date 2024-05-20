@@ -15,8 +15,11 @@ a.nav-link {
     color: black;
 }
 nav > div.logo {
-    background-color: rgb(5, 55, 50);
-    padding: 15px;
+    background-image: url('../user.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    padding: 20px;
     border-radius: 50%;
     margin-right: 10px;
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);

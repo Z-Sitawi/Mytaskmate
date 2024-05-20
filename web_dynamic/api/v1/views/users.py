@@ -26,14 +26,17 @@ def del_user(user_id):
     return jsonify({})
 
 
-@app_views.route('/signup', methods=['POST'], strict_slashes=False)
+@app_views.route('/signup', methods=['POST', 'GET'], strict_slashes=False)
 def sign_up():
     """ Creates a User object """
+    if request.method == 'GET':
+        if 'user' in session:
+            return redirect(url_for('home'))
+        return render_template(template_name_or_list='main.html', up=True), 201
+
     from models.user import User
-    username = request.form.get('username')
-    email = request.form.get('email')
-    pwd = request.form.get('pwd')
-    pwd2 = request.form.get('pwd2')
+    username, email = request.form.get('username'), request.form.get('email')
+    pwd, pwd2 = request.form.get('pwd'), request.form.get('pwd2')
     errors = []
 
     message = "Your account has been created successfully"
@@ -57,9 +60,13 @@ def sign_up():
         return render_template(template_name_or_list='main.html', message=message, up=True), 201
 
 
-@app_views.route('/login', methods=['GET', 'POST'], strict_slashes=False)
+@app_views.route('/login', methods=['POST', 'GET'], strict_slashes=False)
+@app_views.route('/signin', methods=['POST', 'GET'], strict_slashes=False)
 def login():
     """Logs in to a User account if it exists"""
+    if 'user' in session:
+        return redirect(url_for('home'))
+
     if request.method == 'POST':
         account_holder = request.form['loginUser']
         pwd = request.form['loginPwd']

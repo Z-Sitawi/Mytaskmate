@@ -8,6 +8,7 @@
     <title>MyTaskMate</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/header.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/dash.css') }}">
 
 
 </head>
@@ -21,7 +22,7 @@
                       <a class="nav-link active" href="./dashboard">Dashboard</a>
                     </li>
                    <li class="nav-item">
-                      <a class="nav-link" href="./home">Home</a>
+                      <a class="nav-link" href="home">Home</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link" href="history">History</a>
@@ -42,7 +43,81 @@
           </div>
         </nav>
     </header><br>
-    <h1>dashboard</h1>
+    <main>
+      <div class="dashboard p-4">
+        <div class="section" id="today">
+          <div class="header">Today</div>
+          <div class="content">
+              <div class="line-chart d-flex gap-3 justify-content-around align-items-center">
+                  <section class="p-2 text-center">
+                    <h5 class="text-dark"><b>Total Tasks</b></h5>
+                    <h2><b>{{ info['today']['total_tasks'] }}</b></h2>
+                  </section>
+
+                  <section class="p-2 text-center">
+                    <h5 class="text-dark"><b>completed</b></h5>
+                    <h2 class="text-success"><b>{{ info['today']['completed'] }}</b></h2>
+                  </section>
+
+                  <section class="p-2 text-center">
+                    <h5 class="text-dark"><b>Not Yet completed</b></h5>
+                    <h2 class="text-danger"><b>{{ info['today']['uncompleted'] }}</b></h2>
+                  </section>
+              </div>
+          </div>
+        </div>
+
+        <div class="section" id="current-month">
+              <div class="header">Current Month</div>
+              <div class="content line-chart py-3">
+                <h2 class="text-center d-flex justify-content-between">
+                  <b>Missions</b>
+                  <b>{{ info['month']['missions'] }}</b>
+                </h2>
+
+                <h2 class="text-center d-flex justify-content-between">
+                  <b class="text-secondary">Total Tasks</b>
+                  <b>{{ info['month']['total_tasks'] }}</b>
+                </h2>
+
+                <h2 class="text-center d-flex justify-content-between">
+                  <b class="text-success">Completed</b>
+                  <b>{{ info['month']['completed'] }}</b>
+                </h2>
+
+                <h2 class="text-center d-flex justify-content-between">
+                  <b class="text-danger">Uncompleted</b>
+                  <b>{{ info['month']['uncompleted'] }}</b>
+                </h2>
+              </div>
+        </div>
+
+        <div class="section" id="all-time">
+          <div class="header">All Time</div>
+          <div class="content line-chart py-3">
+            <h2 class="text-center d-flex justify-content-between">
+              <b>Missions</b>
+              <b>{{ info['all']['missions'] }}</b>
+            </h2>
+
+            <h2 class="text-center d-flex justify-content-between">
+              <b class="text-secondary">Total Tasks</b>
+              <b>{{ info['all']['total_tasks'] }}</b>
+            </h2>
+
+            <h2 class="text-center d-flex justify-content-between">
+              <b class="text-success">Completed</b>
+              <b>{{ info['all']['completed'] }}</b>
+            </h2>
+
+            <h2 class="text-center d-flex justify-content-between">
+              <b class="text-danger">Uncompleted</b>
+              <b class="">{{ info['all']['uncompleted'] }}</b>
+            </h2>
+          </div>
+        </div>
+      </div>
+  </main>
     <footer class="row m-0 py-4">
       <section class="aboutUs col-12">
         <h6 class="text-center my-3" id="abus">About Us</h6>

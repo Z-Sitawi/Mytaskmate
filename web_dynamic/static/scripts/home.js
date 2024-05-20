@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', async function () {
   try {
     const missionData = await fetchMissionStatus();
     if (missionData.active === true && missionData.user_id === userId) {
-      // deactivateMission(missionData.created_at, missionData.id)
       handleActiveMission(createBtn, deleteBtn, missionData);
     } else {
       handleInactiveMission(createBtn, deleteBtn);
@@ -26,7 +25,6 @@ async function fetchMissionStatus () {
 function handleActiveMission (createBtn, deleteBtn, data) {
   createBtn.style.display = 'none';
   deleteBtn.style.display = 'flex';
-  document.querySelector('#noTasks').style.display = 'none';
   document.querySelector('#missionDate h2').innerHTML = Today();
   document.querySelector('section#mission').style.minHeight = '500px';
   document.querySelector('#addTaskBtn').style.display = 'block';
@@ -35,6 +33,7 @@ function handleActiveMission (createBtn, deleteBtn, data) {
 function handleInactiveMission (createBtn, deleteBtn) {
   deleteBtn.style.display = 'none';
   createBtn.style.display = 'flex';
+  document.querySelector('#noTasks').classList.remove('d-none');
   document.querySelector('section#mission').style.minHeight = '0px';
   document.querySelector('#addTaskBtn').style.display = 'none';
 }

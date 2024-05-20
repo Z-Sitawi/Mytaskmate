@@ -3,8 +3,8 @@ import secrets
 from flask import Flask, make_response, render_template, session, url_for, redirect
 from models import storage
 from web_dynamic.api.v1.views import app_views
-app = Flask(__name__, template_folder='/root/MyTaskMate/web_dynamic/templates/',
-            static_folder='/root/MyTaskMate/web_dynamic/static')
+app = Flask(__name__, template_folder='/root/Mytaskmate/web_dynamic/templates/',
+            static_folder='/root/Mytaskmate/web_dynamic/static')
 
 app.register_blueprint(app_views)
 app.secret_key = secrets.token_hex(16)
@@ -27,9 +27,12 @@ def not_found(error):
     return make_response('<h1 style="text-align: center">Page Not Found</h1>', 404)
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def main():
-    return render_template('main.html')
+    if 'user' in session:
+        return redirect(url_for('home'))
+    else:
+        return render_template('main.html')
 
 
 @app.route('/dashboard', methods=['GET'])
@@ -41,7 +44,8 @@ def dashboard():
         if user:
             # Pass user's ID and username to the home page template
             storage.deactivate_mission(user_id)
-            return render_template('dashboard.html')
+            dashboard_info = storage.get_dashboard_info(user_id)
+            return render_template('dashboard.html', info=dashboard_info)
         else:
             # Handle case where user details cannot be retrieved
             return "User details not found", 404
@@ -107,4 +111,5 @@ def settings():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=5000, debug=False, threaded=True)
+
